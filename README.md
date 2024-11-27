@@ -1,15 +1,5 @@
 Dataset Description:
 The MUSAN dataset is a comprehensive collection of labeled audio files designed for speech, music, and noise classification tasks. Created to support various audio classification and speech processing projects, MUSAN includes diverse audio content suitable for real-world applications such as voice activity detection (VAD), speech enhancement, and environmental sound classification. The dataset is structured into three main categories: Speech, Music, and Noise, each containing different sources and types of audio that add variability and depth to the dataset, making it robust for training and evaluation in machine learning projects.
-Category	Subcategory	File count	Description
-Speech	Librivox	342	Speech from public domain audiobooks, offering clear and natural spoken audio with minimal noise.
-	US-Gov	84	Speech recordings from U.S. government proceedings featuring varied speaking styles.
-Music	FMA	370	Music samples from the Free Music Archive (FMA) across diverse genres, such as rock, jazz, and pop.
-	HD-Classical	150	High-definition classical music recordings, adding a detailed spectral profile.
-	Jamendo	140	Music from the Jamendo platform enhances genre diversity with various instrumental and vocal tracks.
-Noise	Free Sound	620	Free Sound's environmental sounds include city noises, nature sounds, and ambient background.
-	Sound Bible	310	Everyday sounds, such as household noises, transportation, and human activities, add audio variance.
-Each primary category is further subdivided into specific audio types, offering a balanced and well-organized structure for classification tasks. All audio files are provided at a standard sampling rate of 16 kHz. The files are encoded with 16-bit depth, providing a high-quality resolution suitable for machine learning applications without excessive computational demand and the audio files are in WAV format, a lossless format that preserves audio quality and facilitates straightforward processing without compression artifacts.
-Table I. The structure of the MUSAN dataset
 
 The MUSAN dataset, with its structured organization, high-quality audio, and well-labeled categories, serves as an ideal resource for developing models in audio classification tasks, ensuring reliability and performance across diverse applications.
 
@@ -28,6 +18,7 @@ Results:
 Accuracy: 0.96
 F1 Score: 0.90
 Observation: This initial training served as a reference for further optimization.
+
 Step 2: Adding a Validation Split (80-10-10 Random Split)
 
 Objective: To add a validation set for evaluating the model more comprehensively and reduce overfitting risks.
@@ -39,6 +30,7 @@ Validation F1 Score: 0.93
 Test Accuracy: 0.95
 Test F1 Score: 0.86
 Observation: The validation results indicated the model was slightly overfitting, prompting further adjustments.
+
 Step 3: Filtering the Dataset
 
 Objective: To test if denoising the dataset can improve model accuracy.
@@ -47,6 +39,7 @@ Results:
 Accuracy: 0.93
 F1 Score: 0.81
 Observation: The denoising process negatively impacted accuracy, likely due to the loss of relevant frequency components. This approach was therefore abandoned.
+
 Step 4: Comparing with Hidden Markov Model (HMM)
 
 Objective: To compare the SVM's performance with an HMM for classification purposes.
@@ -54,6 +47,7 @@ Results:
 HMM Accuracy: 0.70
 HMM F1 Score: 0.58
 Observation: The HMM underperformed compared to SVM, confirming that SVM was the more suitable choice for this data.
+
 Step 5: Applying t-Test Before and After Training
 
 Objective: To evaluate the statistical significance of the feature distribution before and after training.
@@ -63,6 +57,7 @@ After Training: A t-test was performed to compare predicted labels against actua
 Results:
 Pre-Training t-Test: t-statistic = -2.79, p-value = 5.48e-03
 Post-Training t-Test: t-statistic = 0.73, p-value = 4.68e-01
+
 Step 6: Applying PCA
 
 Objective: To reduce feature dimensionality and possibly improve training efficiency.
@@ -71,6 +66,7 @@ Results:
 Accuracy: 0.95
 F1 Score: 0.88
 Observation: PCA slightly reduced accuracy, indicating that the removed features may have contained some useful information.
+
 Step 7: Adding Zero Crossing Rate (ZCR) to MFCC Features
 
 Objective: To enhance the model's ability to differentiate between speech and non-speech using ZCR in combination with MFCC.
@@ -78,6 +74,7 @@ Results:
 Accuracy: 0.96
 F1 Score: 0.91
 Observation: Adding ZCR slightly improved the F1 score, indicating it provided complementary information to MFCC.
+
 Step 8: Modifying Window and Hop Length (20 ms and 10 ms, respectively)
 
 Objective: To apply more commonly accepted standard settings for window size and hop length in speech processing.
@@ -85,6 +82,7 @@ Results:
 Accuracy: 0.97
 F1 Score: 0.91
 Observation: The standard settings for window and hop length further improved model accuracy.
+
 Step 9: Combined Optimizations for Final Evaluation (Non-Random Split 80/20)
 
 Objective: To evaluate the model performance after applying all of the best optimizations together.
@@ -94,6 +92,7 @@ Pre-Training t-Test: t-statistic = -3.07, p-value = 2.32e-03
 Accuracy: 0.97
 F1 Score: 0.91
 Post-Training t-Test: t-statistic = 1.07, p-value = 2.86e-01
+
 Step 10: Combined Optimizations for Final Evaluation (Random Split 80/10/10)
 
 Objective: To evaluate the optimized model on the random split dataset.
@@ -103,6 +102,7 @@ Accuracy: 0.99
 F1 Score: 0.97
 Post-Training t-Test: t-statistic = 0.00, p-value = 1.00e+00
 Observation: This was the best-performing setup with a nearly perfect accuracy and F1 score.
+
 Step 11: K-fold Cross-Validation (5-fold)
 
 Objective: To evaluate the robustness of the final model using cross-validation.
